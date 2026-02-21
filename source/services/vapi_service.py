@@ -6,11 +6,23 @@ VAPI_BASE_URL = "https://api.vapi.ai"
 
 class VapiService:
     def __init__(self):
-        self.api_key = settings.vapi_config.api_key
-        self.headers = {
-            "Authorization": f"Bearer {self.api_key}",
-            "Content-Type": "application/json"
-        }
+        self._api_key = None
+        self._headers = None
+
+    @property
+    def api_key(self):
+        if self._api_key is None:
+            self._api_key = settings.vapi_config.api_key
+        return self._api_key
+
+    @property
+    def headers(self):
+        if self._headers is None:
+            self._headers = {
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json"
+            }
+        return self._headers
 
     def fetch_assistant(self, assistant_id: str):
         """Fetch assistant details from VAPI."""
