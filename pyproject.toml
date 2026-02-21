@@ -17,6 +17,7 @@ dependencies = [
     "google-auth-oauthlib>=1.2.0",
     "python-dotenv>=1.0.1",
     "loguru>=0.7.2"
+    "mangum>=0.26.0"
 ]
 
 [project.optional-dependencies]
@@ -26,9 +27,6 @@ dev = [
 
 [tool.railway]
 start = "uvicorn source.app:app --host 0.0.0.0 --port $PORT"
-
-[project.scripts]
-app = "source.app:app"
 
 [build-system]
 requires = ["hatchling"]
