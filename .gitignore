@@ -6,3 +6,7 @@ tests
 .venv/*
 .vscode
 .vscode/*
+logs/*
+*.lock
+nodes_modules
+dist
