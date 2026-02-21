@@ -26,6 +26,14 @@ app.add_middleware(
 # Include centralized routers 
 app.include_router(api_router, prefix="/api")
 
+@app.get("/api/")
+def api_root():
+    return {"message": "API is running. (React UI not built yet)"}
+
+@app.get("/api")
+def api_root_no_slash():
+    return {"message": "API is running. (React UI not built yet)"}
+
 @app.on_event("startup")
 def startup_event():
     logger.info(f"Starting VAPI Voice Agent System. API Config: v{settings.VERSION}")
