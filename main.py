@@ -1,3 +1,3 @@
-from source.main import app
+from source.app import app
 
 # This file exists solely to provide an entrypoint for Vercel's Python runtime.

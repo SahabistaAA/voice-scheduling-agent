@@ -40,7 +40,7 @@ We use `uv` for lightning-fast Python package management and `npm` for the React
 
 3. **Run the FastAPI server**:
    ```bash
-   uv run uvicorn source.main:app --host 0.0.0.0 --port 8000 --reload
+   uv run uvicorn source.app:app --host 0.0.0.0 --port 8000 --reload
    ```
    *Navigate to `http://localhost:8000/` to test locally!*
 
