@@ -4,10 +4,10 @@
     { "src": "api/index.py", "use": "@vercel/python" },
     { "src": "source/ui/package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
   ],
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index.py" },
-    { "source": "/assets/(.*)", "destination": "/source/ui/dist/assets/$1" },
-    { "source": "/vite.svg", "destination": "/source/ui/dist/vite.svg" },
-    { "source": "/(.*)", "destination": "/source/ui/dist/index.html" }
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/index.py" },
+    { "src": "/assets/(.*)", "dest": "/source/ui/dist/assets/$1" },
+    { "src": "/vite.svg", "dest": "/source/ui/dist/vite.svg" },
+    { "src": "/(.*)", "dest": "/source/ui/dist/index.html" }
   ]
 }
