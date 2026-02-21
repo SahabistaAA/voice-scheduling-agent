@@ -23,8 +23,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include centralized routers
-app.include_router(api_router, prefix="/api")
+# Include centralized routers (without /api prefix, as Vercel natively handles the /api routing)
+app.include_router(api_router)
 
 @app.on_event("startup")
 def startup_event():
