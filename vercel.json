@@ -1,13 +1,13 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/[...catchall].py", "use": "@vercel/python" },
+    { "src": "api/index.py", "use": "@vercel/python" },
     { "src": "source/ui/package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
   ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)", "dest": "/source/ui/dist/$1" },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/source/ui/dist/index.html" }
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.py" },
+    { "source": "/assets/(.*)", "destination": "/source/ui/dist/assets/$1" },
+    { "source": "/vite.svg", "destination": "/source/ui/dist/vite.svg" },
+    { "source": "/(.*)", "destination": "/source/ui/dist/index.html" }
   ]
 }
