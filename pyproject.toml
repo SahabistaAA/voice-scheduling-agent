@@ -27,10 +27,10 @@ dev = [
 ]
 
 [project.scripts]
-app = "source.app:app"
+app = "app:app"
 
 [tool.railway]
-start = "uvicorn source.app:app --host 0.0.0.0 --port $PORT"
+start = "uvicorn app:app --host 0.0.0.0 --port $PORT"
 
 [build-system]
 requires = ["hatchling"]
