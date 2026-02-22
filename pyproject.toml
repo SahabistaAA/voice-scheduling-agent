@@ -26,8 +26,6 @@ dev = [
     "pytest>=8.0.0"
 ]
 
-[project.scripts]
-app = "app:app"
 
 [tool.railway]
 start = "uvicorn app:app --host 0.0.0.0 --port $PORT"
