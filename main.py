@@ -1,5 +1,8 @@
 import uvicorn
 from fastapi import FastAPI
+import sys
+import os
+
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, FileResponse
@@ -8,7 +11,6 @@ from source.api.routes import api_router
 from source.utils.logger import logger
 import os
 
-# Nixpacks requires an explicit FastAPI() instantiation in the entrypoint file.
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
@@ -24,8 +26,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include centralized routers
+# Include centralized routers 
 app.include_router(api_router, prefix="/api")
+
+@app.get("/api/")
+def api_root():
+    return {"message": "API is running. (React UI not built yet)"}
+
+@app.get("/api")
+def api_root_no_slash():
+    return {"message": "API is running. (React UI not built yet)"}
 
 @app.on_event("startup")
 def startup_event():
@@ -37,13 +47,14 @@ uiPath = os.path.join(os.path.dirname(__file__), "source", "ui", "dist")
 if os.path.exists(uiPath):
     logger.info(f"Mounting static UI from {uiPath}")
     app.mount("/assets", StaticFiles(directory=os.path.join(uiPath, "assets")), name="assets")
-
+    
     @app.get("/{full_path:path}")
     def serve_react_app(full_path: str):
-        """Serve React index.html for all frontend routes."""
+        """Serve React index.html for unknown routes to allow client-side routing, or just the root."""
+        # For a basic single-page setup, we just return index.html
         return FileResponse(os.path.join(uiPath, "index.html"))
 else:
-    logger.warning("UI dist folder not found. Running in API-only mode.")
+    logger.warning("UI dist folder not found. API mode only.")
     @app.get("/", response_class=HTMLResponse)
     def root():
         return "<h1>API is running. (React UI not built yet)</h1>"

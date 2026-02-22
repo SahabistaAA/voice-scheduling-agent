@@ -1,11 +1,11 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/index.py", "use": "@vercel/python" },
+    { "src": "main.py", "use": "@vercel/python" },
     { "src": "source/ui/package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
   ],
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index.py" },
+    { "source": "/api/(.*)", "destination": "/main.py" },
     { "source": "/assets/(.*)", "destination": "/source/ui/dist/assets/$1" },
     { "source": "/vite.svg", "destination": "/source/ui/dist/vite.svg" },
     { "source": "/(.*)", "destination": "/source/ui/dist/index.html" }
